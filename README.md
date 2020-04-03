@@ -1,36 +1,22 @@
-debian-ssh
+acknowledgements
+================
+
+fork from https://github.com/krlmlr/debian-ssh
+from Kirill Müller <krlmlr+docker@mailbox.org>
+
+sshd-helper
 ==========
 
-Simple Debian/Ubuntu Docker images with *passwordless* SSH access and a regular user
+Simple Debian Docker images with *passwordless* SSH access and a regular user
 with `sudo` rights
-
-Tags (and their corresponding official base images)
-----
-
-### Debian
-
-- `latest` -> `debian:latest`
-- `jessie` -> `debian:jessie`
-- `wheezy` -> `debian:wheezy`
-- `squeeze` -> `debian:squeeze`
-
-### Ubuntu
-
-- `ubuntu` -> `ubuntu:latest`
-- `vivid` -> `ubuntu:vivid`
-- `utopic` -> `ubuntu:utopic`
-- `trusty` -> `ubuntu:trusty`
-- `precise` -> `ubuntu:precise`
-
 
 Using
 -----
 
-The images are built by [Docker hub](https://registry.hub.docker.com/u/krlmlr/debian-ssh/).
-Each Debian release corresponds to a tag.  To run an SSH daemon in a new Debian "wheezy"
-container:
+The images are built by [Docker hub](https://registry.hub.docker.com/u/plenus/sshd-helper/).
+To run an SSH daemon in a new Debian container:
 
-    docker run -d -p 2222:22 -e SSH_KEY="$(cat ~/.ssh/id_rsa.pub)" krlmlr/debian-ssh:wheezy
+    docker run -d -p 2222:22 -e SSH_KEY="$(cat ~/.ssh/id_rsa.pub)" krlmlr/debian-ssh:10.0.1
 
 This requires a public key in `~/.ssh/id_rsa.pub`.
 
@@ -46,20 +32,6 @@ To connect to this container as regular user:
     ssh -p 2222 docker@localhost
 
 Change `2222` to any local port number of your choice.
-
-
-Enhancing
----------
-
-Each Debian release corresponds to a Git branch, the branches differ only by
-the `FROM` element in the `Dockerfile`.
-
-To create the image `krlmlr/debian-ssh` e.g. for Debian "jessie":
-
-    git checkout jessie
-    make build
-
-Use `make rebuild` to pull the base image and rebuild without caching.
 
 
 Testing
